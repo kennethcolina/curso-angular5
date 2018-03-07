@@ -10,14 +10,14 @@ const postcssUrl = require('postcss-url');
 const postcssImports = require('postcss-import');
 
 const { NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin } = require('webpack');
-const { NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin, PostcssCliResources } = require('@angular/cli/plugins/webpack');
+const { ScriptsWebpackPlugin, NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin, PostcssCliResources } = require('@angular/cli/plugins/webpack');
 const { CommonsChunkPlugin } = require('webpack').optimize;
 const { AngularCompilerPlugin } = require('@ngtools/webpack');
 
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const realNodeModules = fs.realpathSync(nodeModules);
 const genDirNodeModules = path.join(process.cwd(), 'src', '$$_gendir', 'node_modules');
-const entryPoints = ["inline","polyfills","sw-register","styles","vendor","main"];
+const entryPoints = ["inline","polyfills","sw-register","styles","scripts","vendor","main"];
 const hashFormat = {"chunk":"","extract":"","file":".[hash:20]","script":""};
 const baseHref = "";
 const deployUrl = "";
@@ -152,7 +152,8 @@ module.exports = {
       "./src/polyfills.ts"
     ],
     "styles": [
-      "./src/styles.scss"
+      "./src/styles.scss",
+      "./node_modules/bootstrap/dist/css/bootstrap.min.css"
     ]
   },
   "output": {
@@ -164,8 +165,8 @@ module.exports = {
   "module": {
     "rules": [
       {
-        "test": /\.html$/,
-        "loader": "raw-loader"
+        "test": /\.pug$/,
+        "loader": [ "raw-loader", "pug-html-loader" ]
       },
       {
         "test": /\.(eot|svg|cur)$/,
@@ -185,7 +186,8 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src/styles.scss")
+          path.join(process.cwd(), "src/styles.scss"),
+          path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.css$/,
         "use": [
@@ -204,7 +206,8 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src/styles.scss")
+          path.join(process.cwd(), "src/styles.scss"),
+          path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.scss$|\.sass$/,
         "use": [
@@ -231,7 +234,8 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src/styles.scss")
+          path.join(process.cwd(), "src/styles.scss"),
+          path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.less$/,
         "use": [
@@ -256,7 +260,8 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src/styles.scss")
+          path.join(process.cwd(), "src/styles.scss"),
+          path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.styl$/,
         "use": [
@@ -282,7 +287,8 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src/styles.scss")
+          path.join(process.cwd(), "src/styles.scss"),
+          path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.css$/,
         "use": [
@@ -302,7 +308,8 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src/styles.scss")
+          path.join(process.cwd(), "src/styles.scss"),
+          path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.scss$|\.sass$/,
         "use": [
@@ -330,7 +337,8 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src/styles.scss")
+          path.join(process.cwd(), "src/styles.scss"),
+          path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.less$/,
         "use": [
@@ -356,7 +364,8 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src/styles.scss")
+          path.join(process.cwd(), "src/styles.scss"),
+          path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.styl$/,
         "use": [
@@ -389,6 +398,17 @@ module.exports = {
   },
   "plugins": [
     new NoEmitOnErrorsPlugin(),
+    new ScriptsWebpackPlugin({
+      "name": "scripts",
+      "sourceMap": true,
+      "filename": "scripts.bundle.js",
+      "scripts": [
+        "/home/kenneth/cursos-udemy/app3/node_modules/popper.js/dist/umd/popper.min.js",
+        "/home/kenneth/cursos-udemy/app3/node_modules/jquery/dist/jquery.min.js",
+        "/home/kenneth/cursos-udemy/app3/node_modules/bootstrap/dist/js/bootstrap.min.js"
+      ],
+      "basePath": "/home/kenneth/cursos-udemy/app3"
+    }),
     new CopyWebpackPlugin([
       {
         "context": "src",

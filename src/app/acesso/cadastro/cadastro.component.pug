@@ -1,0 +1,28 @@
+html
+	body
+		.card(style="width: 20rem;")
+			.card-body
+				.card-title
+				form([formGroup]="formulario", (ngSubmit)="cadastrarUsuario()")
+					.form-group
+						input.form-control(type="email" placeholder="E-mail", formControlName="email")
+					.form-group
+						input.form-control(type="text" placeholder="Nome completo", formControlName="nome_completo")
+					.form-group
+						input.form-control(type="text" placeholder="Nome de usuário", formControlName="nome_usuario")
+					.form-group
+						input.form-control(type="password" placeholder="Senha", formControlName="senha")
+					button.btn.btn-primary.btn-sm.btn-block(type="submit") Cadastre-se
+				hr
+				p.small.text-center
+					| Ao cadastrar-se, você concorda com nossos
+					b  Termos
+					|  e
+					b  Política de Privacidade
+					| .
+		br
+		.card(style="width: 20rem;")
+			.card-body
+				p.card-text
+					| Tem uma conta?
+					a.card-link(href="#", (click)="exibirPainelLogin()")  Faça login
