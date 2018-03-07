@@ -1,0 +1,20 @@
+html
+	body
+		.card(style="width: 20rem;")
+			.card-body
+				.card-title
+				form([formGroup]="formulario", (ngSubmit)="autenticar()")
+					.form-group
+						input.form-control(type="email", placeholder="E-mail", formControlName="email")
+					.form-group
+						input.form-control(type="password" placeholder="Senha", formControlName="senha")
+					button.btn.btn-primary.btn-sm.btn-block(type="submit") Entrar
+				hr
+				p.small.text-danger.text-center
+					| O nome de usuário inserido não pertence a uma conta. Verifique seu nome de usuário e tente novamente.
+		br
+		.card(style="width: 20rem;")
+			.card-body
+				p.card-text
+					| Não tem uma conta?
+					a.card-link(href="#", (click)="exibirPainelCadastro()")  Cadastre-se
