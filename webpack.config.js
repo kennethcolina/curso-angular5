@@ -166,7 +166,7 @@ module.exports = {
     "rules": [
       {
         "test": /\.pug$/,
-        "loader": [ "raw-loader", "pug-html-loader" ]
+        "loader": ["raw-loader", "pug-html-loader"]
       },
       {
         "test": /\.(eot|svg|cur)$/,
@@ -403,11 +403,11 @@ module.exports = {
       "sourceMap": true,
       "filename": "scripts.bundle.js",
       "scripts": [
-        "/home/kenneth/cursos-udemy/angular4/projetos/app3/node_modules/popper.js/dist/umd/popper.min.js",
-        "/home/kenneth/cursos-udemy/angular4/projetos/app3/node_modules/jquery/dist/jquery.min.js",
-        "/home/kenneth/cursos-udemy/angular4/projetos/app3/node_modules/bootstrap/dist/js/bootstrap.min.js"
+        "/home/kenneth/cursos-udemy/curso-angular5/node_modules/popper.js/dist/umd/popper.min.js",
+        "/home/kenneth/cursos-udemy/curso-angular5/node_modules/jquery/dist/jquery.min.js",
+        "/home/kenneth/cursos-udemy/curso-angular5/node_modules/bootstrap/dist/js/bootstrap.min.js"
       ],
-      "basePath": "/home/kenneth/cursos-udemy/angular4/projetos/app3"
+      "basePath": "/home/kenneth/cursos-udemy/curso-angular5"
     }),
     new CopyWebpackPlugin([
       {

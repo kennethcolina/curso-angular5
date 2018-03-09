@@ -1,0 +1,14 @@
+.row(*ngFor="let publicacao of publicacoes")
+	.col.d-flex.justify-content-center
+		.card
+			.card-body
+				p.card-text
+					strong {{publicacao.titulo}}
+			img.card-img([src]='publicacao.url_imagem')
+			.card-body
+				p.card-text
+					strong Jorge
+					|  foi um belo dia no parque!
+				hr
+				input.form-control.comentario(type='text', placeholder='Adicione um comentário...')
+.

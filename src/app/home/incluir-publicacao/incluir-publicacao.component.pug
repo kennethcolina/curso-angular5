@@ -1,0 +1,28 @@
+#exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+	.modal-dialog(role='document')
+		.modal-content(*ngIf="progressoPublicacao === 'pendente'")
+			form([formGroup]='formulario', (ngSubmit)='publicar()')
+				.modal-header
+					h5#exampleModalLabel.modal-title Criar uma publicação
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+						span(aria-hidden='true') ×
+				.modal-body
+					input.form-control(type='file', accept='image/*', (change)='preparaImagemUpload($event)')
+					input.form-control(type='text', placeholder='Título da publicação', formControlName='titulo')
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Fechar
+					button.btn.btn-primary(type='submit') Publicar
+		.modal-content(*ngIf="progressoPublicacao === 'andamento'")
+			.modal-header
+				h5#exampleModalLabel.modal-title Publicação em andamento
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') ×
+			.modal-body
+				| Progresso: {{ porcentagemUpload }}%
+		.modal-content(*ngIf="progressoPublicacao === 'concluido'")
+			.modal-header
+				h5#exampleModalLabel.modal-title Publicação realizada com sucesso
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') ×
+			.modal-body
+				| Sua publicação foi realizada com sucesso!

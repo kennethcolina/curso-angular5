@@ -2,10 +2,11 @@ nav.navbar.fixed-top.navbar-light.bg-white
 	.container
 		.logo
 		div
-			.add-post
+			a.add-post(data-toggle="modal", data-target="#exampleModal")
 			a(href="#", (click)="sair()" style="margin-left: 25px") Sair
 br
 br
 br
 .container
-	app-publicacoes
+	app-publicacoes(#publicacoes='')
+	app-incluir-publicacao((atualizarTimeLineTeste)="atualizarTimeLine()")
